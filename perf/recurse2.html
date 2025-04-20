@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Recurse</h1>
+    <script>
+        var moduleInstance = null;
+        function bar(count) {
+            //console.log("bar called with count: " + count);
+            if (count > 0) {
+              foo(count -1);
+            }
+        }
+
+        function foo(count) {
+            //console.log("foo called with count: " + count);
+            if (count <= 0) {
+              //console.log("Terminating");
+              return;
+            }
+            bar(count -1);
+        }
+
+        function run() {
+            const start = performance.now(); // Start timing
+            for (let i = 1; i <=  1000 * 1000 * 1000; i++) {
+                foo(6);
+            }
+            const end = performance.now();   // End timing
+
+            document.getElementById("result").textContent = "Time: "  + (end - start) + "ms";
+        }
+    </script>
+    <button onclick="run()">Run</button>
+    <h2><p id="result">Time: </p></h2>
+</body>
+</html>
