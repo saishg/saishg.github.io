@@ -6,7 +6,7 @@
     <script type="text/javascript" src="recurse.js"></script>
 </head>
 <body>
-    <h1>Recurse (JS -> WASM)</h1>
+    <h1>Recurse (JS -> WASM) - 10M iterations</h1>
     <script>
         var moduleInstance = null;
 
@@ -18,7 +18,7 @@
 
             document.getElementById("result").textContent = "Running";
             const start = performance.now(); // Start timing
-            for (let i = 1; i <= 1 * 1000 * 1000; i++) {
+            for (let i = 1; i <= 1- * 1000 * 1000; i++) {
                 moduleInstance._foo(6);
             }
             const end = performance.now();   // End timing
