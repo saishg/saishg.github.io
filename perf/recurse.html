@@ -6,7 +6,7 @@
     <script type="text/javascript" src="recurse.js"></script>
 </head>
 <body>
-    <h1>Recurse (JS -> WASM) - 10M iterations</h1>
+    <h1>Measure performance of JS -> WASM calls</h1>
     <script>
         var moduleInstance = null;
 
@@ -18,18 +18,20 @@
 
             document.getElementById("result").textContent = "Running";
             const start = performance.now(); // Start timing
-            for (let i = 1; i <= 10 * 1000 * 1000; i++) {
+            let i = 0;
+
+            while (performance.now() - start < 1000) {
+                i++;
                 moduleInstance._foo(6);
             }
-            const end = performance.now();   // End timing
 
-            document.getElementById("result").textContent = "Time:"  + (end - start) + "ms";
+            document.getElementById("result").textContent = "Number of calls: " + i / (1000 * 1000) + " million";
         }
 
         // Load the module when the page loads
         Module().then(instance => {
             moduleInstance = instance;
-            document.getElementById("result").textContent = "Ready";
+            document.getElementById("result").textContent = "Number of calls:";
         }).catch(error => {
             console.error('Failed to load WASM module:', error);
             document.getElementById("result").textContent = "Error loading module";

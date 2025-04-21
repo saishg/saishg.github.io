@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>Recurse (pure JS) - 1B iterations</h1>
+    <h1>Measure performance of pure JS calls</h1>
     <script>
         var moduleInstance = null;
         function bar(count) {
@@ -26,15 +26,17 @@
 
         function run() {
             const start = performance.now(); // Start timing
-            for (let i = 1; i <=  1000 * 1000 * 1000; i++) {
+            let i = 0;
+
+            while (performance.now() - start < 1000) {
+                i++;
                 foo(6);
             }
-            const end = performance.now();   // End timing
 
-            document.getElementById("result").textContent = "Time: "  + (end - start) + "ms";
+            document.getElementById("result").textContent = "Number of calls: " + i / (1000 * 1000) + " million";
         }
     </script>
     <button onclick="run()">Run</button>
-    <h2><p id="result">Time: </p></h2>
+    <h2><p id="result">Number of calls: </p></h2>
 </body>
 </html>
